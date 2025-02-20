@@ -13,6 +13,11 @@ import json
 now_dir = os.getcwd()
 sys.path.append(os.path.join(now_dir))
 
+applio_dir = os.path.realpath(__file__)
+applio_dir_len = applio_dir.find("Applio") + len("Applio")
+applio_dir = applio_dir[:applio_dir_len]
+sys.path.append(os.path.join(applio_dir))
+
 # Zluda hijack
 import rvc.lib.zluda
 
@@ -104,7 +109,7 @@ class FeatureInput:
         self.device = device
         if f0_method == "rmvpe":
             self.model_rmvpe = RMVPE0Predictor(
-                os.path.join("rvc", "models", "predictors", "rmvpe.pt"),
+                os.path.join(applio_dir, "rvc", "models", "predictors", "rmvpe.pt"),
                 device=device,
             )
 

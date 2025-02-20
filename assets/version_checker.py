@@ -3,8 +3,10 @@ import sys
 import json
 import requests
 
-now_dir = os.getcwd()
-sys.path.append(now_dir)
+now_dir = os.path.realpath(__file__)
+applio_dir_len = applio_dir.find("Applio") + len("Applio")
+now_dir = now_dir[:applio_dir_len]
+sys.path.append(os.path.join(now_dir))
 
 config_file = os.path.join(now_dir, "assets", "config.json")
 

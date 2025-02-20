@@ -25,6 +25,11 @@ import torch.multiprocessing as mp
 now_dir = os.getcwd()
 sys.path.append(os.path.join(now_dir))
 
+applio_dir = os.path.realpath(__file__)
+applio_dir_len = applio_dir.find("Applio") + len("Applio")
+applio_dir = applio_dir[:applio_dir_len]
+sys.path.append(os.path.join(applio_dir))
+
 # Zluda hijack
 import rvc.lib.zluda
 
@@ -74,7 +79,7 @@ checkpointing = strtobool(sys.argv[16])
 randomized = True
 optimizer = "RAdam"  # "AdamW"
 
-current_dir = os.getcwd()
+current_dir = applio_dir
 experiment_dir = os.path.join(current_dir, "logs", model_name)
 config_save_path = os.path.join(experiment_dir, "config.json")
 dataset_path = os.path.join(experiment_dir, "sliced_audios")

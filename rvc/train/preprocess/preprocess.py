@@ -16,6 +16,11 @@ import soxr
 now_directory = os.getcwd()
 sys.path.append(now_directory)
 
+applio_dir = os.path.realpath(__file__)
+applio_dir_len = applio_dir.find("Applio") + len("Applio")
+applio_dir = applio_dir[:applio_dir_len]
+sys.path.append(os.path.join(applio_dir))
+
 from rvc.lib.utils import load_audio
 from rvc.train.preprocess.slicer import Slicer
 

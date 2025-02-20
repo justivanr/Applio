@@ -7,8 +7,12 @@ from collections import OrderedDict
 
 import torch
 
-now_dir = os.getcwd()
-sys.path.append(now_dir)
+applio_dir = os.path.realpath(__file__)
+applio_dir_len = applio_dir.find("Applio") + len("Applio")
+applio_dir = applio_dir[:applio_dir_len]
+sys.path.append(os.path.join(applio_dir))
+
+now_dir = applio_dir
 
 
 def replace_keys_in_dict(d, old_key_part, new_key_part):

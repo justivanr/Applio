@@ -8,12 +8,13 @@ from bs4 import BeautifulSoup
 from urllib.parse import unquote
 from tqdm import tqdm
 
-now_dir = os.getcwd()
-sys.path.append(now_dir)
+now_dir = os.path.realpath(__file__)
+applio_dir_len = now_dir .find("Applio") + len("Applio")
+now_dir = now_dir [:applio_dir_len]
+sys.path.append(os.path.join(now_dir))
 
 from rvc.lib.utils import format_title
 from rvc.lib.tools import gdown
-
 
 file_path = os.path.join(now_dir, "logs")
 zips_path = os.path.join(file_path, "zips")

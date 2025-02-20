@@ -5,11 +5,15 @@ from rvc.configs.config import Config
 import json
 
 config = Config()
-current_directory = os.getcwd()
+
+applio_dir = os.path.realpath(__file__)
+applio_dir_len = applio_dir.find("Applio") + len("Applio")
+applio_dir = applio_dir[:applio_dir_len]
+current_directory = applio_dir
 
 
 def generate_config(sample_rate: int, model_path: str):
-    config_path = os.path.join("rvc", "configs", f"{sample_rate}.json")
+    config_path = os.path.join(current_directory, "rvc", "configs", f"{sample_rate}.json")
     config_save_path = os.path.join(model_path, "config.json")
     if not os.path.exists(config_save_path):
         shutil.copyfile(config_path, config_save_path)

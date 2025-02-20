@@ -25,8 +25,11 @@ python = sys.executable
 # Get TTS Voices -> https://speech.platform.bing.com/consumer/speech/synthesize/readaloud/voices/list?trustedclienttoken=6A5AA1D4EAFF4E9FB37E23D68491D6F4
 @lru_cache(maxsize=1)  # Cache only one result since the file is static
 def load_voices_data():
+    voices_path = os.path.join(current_script_directory, "rvc", "lib", "tools", "tts_voices.json")
+    voices_path = os.path.abspath(voices_path)
+    print(f'Path to voices json: {voices_path}')
     with open(
-        os.path.join("rvc", "lib", "tools", "tts_voices.json"), "r", encoding="utf-8"
+        voices_path, "r", encoding="utf-8"
     ) as file:
         return json.load(file)
 
@@ -344,7 +347,7 @@ def run_tts_script(
     sid: int = 0,
 ):
 
-    tts_script_path = os.path.join("rvc", "lib", "tools", "tts.py")
+    tts_script_path = os.path.join(current_script_directory, "rvc", "lib", "tools", "tts.py")
 
     if os.path.exists(output_tts_path) and os.path.abspath(output_tts_path).startswith(
         os.path.abspath("assets")
@@ -423,7 +426,7 @@ def run_preprocess_script(
     chunk_len: float,
     overlap_len: float,
 ):
-    preprocess_script_path = os.path.join("rvc", "train", "preprocess", "preprocess.py")
+    preprocess_script_path = os.path.join(current_script_directory, "rvc", "train", "preprocess", "preprocess.py")
     command = [
         python,
         preprocess_script_path,
@@ -461,7 +464,7 @@ def run_extract_script(
 ):
 
     model_path = os.path.join(logs_path, model_name)
-    extract = os.path.join("rvc", "train", "extract", "extract.py")
+    extract = os.path.join(current_script_directory, "rvc", "train", "extract", "extract.py")
 
     command_1 = [
         python,
@@ -524,7 +527,8 @@ def run_train_script(
     else:
         pg, pd = "", ""
 
-    train_script_path = os.path.join("rvc", "train", "train.py")
+    train_script_path = os.path.join(current_script_directory, "rvc", "train", "train.py")
+
     command = [
         python,
         train_script_path,
@@ -557,7 +561,9 @@ def run_train_script(
 
 # Index
 def run_index_script(model_name: str, index_algorithm: str):
-    index_script_path = os.path.join("rvc", "train", "process", "extract_index.py")
+    
+    index_script_path = os.path.join(current_script_directory, "rvc", "train", "process", "extract_index.py")
+    
     command = [
         python,
         index_script_path,

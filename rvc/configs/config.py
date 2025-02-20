@@ -2,11 +2,13 @@ import torch
 import json
 import os
 
+current_script_directory = os.path.dirname(os.path.realpath(__file__))
+
 version_config_paths = [
-    os.path.join("48000.json"),
-    os.path.join("40000.json"),
-    os.path.join("44100.json"),
-    os.path.join("32000.json"),
+    os.path.join(current_script_directory, "48000.json"),
+    os.path.join(current_script_directory, "40000.json"),
+    os.path.join(current_script_directory, "44100.json"),
+    os.path.join(current_script_directory, "32000.json"),
 ]
 
 
@@ -37,7 +39,7 @@ class Config:
     def load_config_json(self):
         configs = {}
         for config_file in version_config_paths:
-            config_path = os.path.join("rvc", "configs", config_file)
+            config_path = os.path.join(current_script_directory, "rvc", "configs", config_file)
             with open(config_path, "r") as f:
                 configs[config_file] = json.load(f)
         return configs
