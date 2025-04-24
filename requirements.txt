@@ -34,6 +34,7 @@ transformers==4.44.2
 matplotlib==3.7.2
 tensorboard
 gradio==5.14.0
+pydantic==2.10.4
 
 # Miscellaneous utilities
 certifi>=2023.07.22; sys_platform == 'darwin'  
